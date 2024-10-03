@@ -1,0 +1,284 @@
+{
+  "laLiga": {
+    "alaves": {
+      "escudo": "escudos/alaves.png",
+      "video": "https://embedstreams.me/mls/houston-dynamo-fc-vs-new-england-revolution-stream-2"
+    },
+    "barcelona": {
+      "escudo": "escudos/barcelona.png",
+      "video": "https://embedstreams.me/mls/real-salt-lake-vs-minnesota-united-fc-stream-4"
+    },
+    "betis": {
+      "escudo": "escudos/betis.png",
+      "video": "#"
+    },
+    "celta": {
+      "escudo": "escudos/celta.png",
+      "video": "#"
+    },
+    "espanyol": {
+      "escudo": "escudos/espanyol.png",
+      "video": "#"
+    },
+    "osasuna": {
+      "escudo": "escudos/osasuna.png",
+      "video": "#"
+    },
+    "atleticomadrid": {
+      "escudo": "escudos/atleticomadrid.png",
+      "video": "#"
+    },
+    "athleticbilbao": {
+      "escudo": "escudos/athleticbilbao.png",
+      "video": "#"
+    },
+    "realbetis": {
+      "escudo": "escudos/betis.png",
+      "video": "#"
+    },
+    "realMadrid": {
+      "escudo": "escudos/realmadrid.png",
+      "video": "#"
+    },
+    "realsociedad": {
+      "escudo": "escudos/realsociedad.png",
+      "video": "#"
+    },
+    "valencia": {
+      "escudo": "escudos/valencia.png",
+      "video": "#"
+    },
+    "valladolid": {
+      "escudo": "escudos/valladolid.png",
+      "video": "#"
+    },
+    "mallorca": {
+      "escudo": "escudos/mallorca.png",
+      "video": "#"
+    },
+    "getafe": {
+      "escudo": "escudos/getafe.png",
+      "video": "#"
+    }
+  },
+  "premierLeague": {
+    "arsenal": {
+      "escudo": "escudos/arsenal.png",
+      "video": "#"
+    },
+    "astonvilla": {
+      "escudo": "escudos/astonvilla.png",
+      "video": "#"
+    },
+    "bournemouth": {
+      "escudo": "escudos/bournemouth.png",
+      "video": "#"
+    },
+    "brentford": {
+      "escudo": "escudos/brentford.png",
+      "video": "#"
+    },
+    "brighton": {
+      "escudo": "escudos/brighton.png",
+      "video": "#"
+    },
+    "chelsea": {
+      "escudo": "escudos/chelsea.png",
+      "video": "#"
+    },
+    "everton": {
+      "escudo": "escudos/everton.png",
+      "video": "#"
+    },
+    "fulham": {
+      "escudo": "escudos/fulham.png",
+      "video": "#"
+    },
+    "liverpool": {
+      "escudo": "escudos/liverpool.png",
+      "video": "#"
+    },
+    "manchestercity": {
+      "escudo": "escudos/manchestercity.png",
+      "video": "#"
+    },
+    "manchesterunited": {
+      "escudo": "escudos/manchesterunited.png",
+      "video": "#"
+    },
+    "tottenham": {
+      "escudo": "escudos/tottenham.png",
+      "video": "#"
+    },
+    "wolves": {
+      "escudo": "escudos/wolves.png",
+      "video": "#"
+    }
+  },
+  "bundesliga": {
+    "augsburgo": {
+      "escudo": "escudos/augsburgo.png",
+      "video": "#"
+    },
+    "bayerleverkusen": {
+      "escudo": "escudos/bayerleverkusen.png",
+      "video": "#"
+    },
+    "bmonchengladbach": {
+      "escudo": "escudos/bmonchengladbach.png",
+      "video": "#"
+    },
+    "bochum": {
+      "escudo": "escudos/bochum.png",
+      "video": "#"
+    },
+    "bayernmunchen": {
+      "escudo": "escudos/bayernmunchen.png",
+      "video": "#"
+    },
+    "borussiadortmund": {
+      "escudo": "escudos/borussiadortmund.png",
+      "video": "#"
+    },
+    "eintrachtfrankfurt": {
+      "escudo": "escudos/eintrachtfrankfurt.png",
+      "video": "#"
+    },
+    "freiburg": {
+      "escudo": "escudos/freiburg.png",
+      "video": "#"
+    },
+    "heidenheim": {
+      "escudo": "escudos/heidenheim.png",
+      "video": "#"
+    },
+    "hoffenheim": {
+      "escudo": "escudos/hoffenheim.png",
+      "video": "#"
+    },
+    "holstein_kiel": {
+      "escudo": "escudos/holstein_kiel.png",
+      "video": "#"
+    },
+    "mainz05": {
+      "escudo": "escudos/mainz05.png",
+      "video": "#"
+    },
+    "rbleipzig": {
+      "escudo": "escudos/rbleipzig.png",
+      "video": "#"
+    },
+    "stuttgart": {
+      "escudo": "escudos/stuttgart.png",
+      "video": "#"
+    },
+    "werderbremen": {
+      "escudo": "escudos/werderbremen.png",
+      "video": "#"
+    },
+    "unionberlin": {
+      "escudo": "escudos/unionberlin.png",
+      "video": "#"
+    }
+  },
+  "serieA": {
+    "atalanta": {
+      "escudo": "escudos/atalanta.png",
+      "video": "#"
+    },
+    "fiorentina": {
+      "escudo": "escudos/fiorentina.png",
+      "video": "#"
+    },
+    "inter": {
+      "escudo": "escudos/inter.png",
+      "video": "#"
+    },
+    "juventus": {
+      "escudo": "escudos/juventus.png",
+      "video": "#"
+    },
+    "lazio": {
+      "escudo": "escudos/lazio.png",
+      "video": "#"
+    },
+    "lecce": {
+      "escudo": "escudos/lecce.png",
+      "video": "#"
+    },
+    "milan": {
+      "escudo": "escudos/milan.png",
+      "video": "#"
+    },
+    "monza": {
+      "escudo": "escudos/monza.png",
+      "video": "#"
+    },
+    "napoli": {
+      "escudo": "escudos/napoli.png",
+      "video": "#"
+    },
+    "roma": {
+      "escudo": "escudos/roma.png",
+      "video": "#"
+    },
+    "torino": {
+      "escudo": "escudos/torino.png",
+      "video": "#"
+    },
+    "udinese": {
+      "escudo": "escudos/udinese.png",
+      "video": "#"
+    },
+    "venezia": {
+      "escudo": "escudos/venezia.png",
+      "video": "#"
+    }
+  },
+  "championsLeague": {
+    "arsenal": {
+      "escudo": "escudos/arsenal.png",
+      "video": "#"
+    },
+    "barcelona": {
+      "escudo": "escudos/barcelona.png",
+      "video": "#"
+    },
+    "bayernmunchen": {
+      "escudo": "escudos/bayernmunchen.png",
+      "video": "#"
+    },
+    "borussiadortmund": {
+      "escudo": "escudos/borussiadortmund.png",
+      "video": "#"
+    },
+    "inter": {
+      "escudo": "escudos/inter.png",
+      "video": "#"
+    },
+    "juventus": {
+      "escudo": "escudos/juventus.png",
+      "video": "#"
+    },
+    "liverpool": {
+      "escudo": "escudos/liverpool.png",
+      "video": "#"
+    },
+    "manchestercity": {
+      "escudo": "escudos/manchestercity.png",
+      "video": "#"
+    },
+    "milan": {
+      "escudo": "escudos/milan.png",
+      "video": "#"
+    },
+    "realMadrid": {
+      "escudo": "escudos/realmadrid.png",
+      "video": "#"
+    },
+    "tottenham": {
+      "escudo": "escudos/tottenham.png",
+      "video": "#"
+    }
+  }
+}

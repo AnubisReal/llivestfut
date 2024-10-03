@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Verdadera Vuelta</title>
+    <link rel="icon" href="escudos/barcelona.png" type="image/png"> <!-- Ajusta la ruta -->
+    <link rel="shortcut icon" href="escudos/barcelona.png" type="image/png"> <!-- Para navegadores antiguos -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            width: 100%;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            cursor: pointer;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        .liga-buttons {
+            margin: 20px;
+        }
+
+        .liga-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin: 5px 5px;
+        }
+
+        .liga-button:hover {
+            background-color: #0056b3;
+        }
+
+        .escudos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .escudo {
+            margin: 10px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .escudo img {
+            width: 150px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .escudo:hover {
+            transform: scale(1.1);
+        }
+
+        #reproductor {
+            display: block;
+            position: fixed;
+            top: 50%;
+            left: 48%;
+            transform: translate(-50%, -50%);
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            padding: 0;
+            z-index: 20;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+            margin-top: 20px; /* Añadir margen superior */
+            width: 90%; /* Ajustar el ancho al 90% */
+            max-width: 400px; /* Limitar el ancho máximo */
+        }
+
+        #reproductor.show {
+            opacity: 1;
+        }
+
+        #reproductor iframe {
+            width: 100%; /* Ajustar el iframe al 100% del contenedor */
+            height: 240px; /* Altura fija */
+            border-radius: 10px;
+            border: none;
+        }
+
+        .close-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-bottom: 10px;
+            font-weight: bold;
+            display: block;
+            width: calc(100% - 20px); /* 100% menos margen */
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+        .close-btn:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 600px) {
+            .escudo img {
+                width: 100px;
+            }
+
+            #reproductor {
+                width: 90%; /* 90% en móviles */
+                max-width: none; /* Quitar max-width para móviles */
+            }
+
+            #reproductor iframe {
+                height: 240px; /* Altura del iframe en móviles */
+            }
+
+            .close-btn {
+                width: calc(100% - 20px); /* Botón de cerrar en móvil */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header onclick="mostrarEscudos()">
+    <h1>La Verdadera Vuelta</h1>
+</header>
+
+<div class="liga-buttons">
+    <button class="liga-button" onclick="mostrarEscudosConVideos()">Equipos con Videos</button>
+    <button class="liga-button" onclick="cambiarLiga('laLiga')">La Liga</button>
+    <button class="liga-button" onclick="cambiarLiga('premierLeague')">Premier League</button>
+    <button class="liga-button" onclick="cambiarLiga('bundesliga')">Bundesliga</button>
+    <button class="liga-button" onclick="cambiarLiga('serieA')">Serie A</button>
+    <button class="liga-button" onclick="cambiarLiga('championsLeague')">Champions League</button>
+</div>
+
+<div class="escudos" id="escudosContainer"></div>
+
+<div id="reproductor">
+    <button class="close-btn" onclick="cerrarReproductor()">Cerrar</button>
+    <div id="videoContainer"></div>
+</div>
+
+<script>
+    let ligaActual = 'laLiga'; // Liga inicial
+    let enlaces; // Objeto para almacenar los enlaces cargados
+
+    // Función para cargar los enlaces desde enlaces.txt
+    function cargarEnlaces() {
+        fetch('enlaces.txt')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al cargar el archivo: ' + response.statusText);
+                }
+                return response.json(); // Convertir la respuesta a JSON
+            })
+            .then(data => {
+                enlaces = data; // Guardar los datos en el objeto enlaces
+                mostrarEscudos(); // Mostrar escudos después de cargar
+            })
+            .catch(error => {
+                console.error('Hubo un problema con la petición Fetch:', error);
+            });
+    }
+
+    // Cambiar liga
+    function cambiarLiga(liga) {
+        ligaActual = liga;
+        mostrarEscudos();
+    }
+
+    // Mostrar escudos de la liga actual
+    function mostrarEscudos() {
+        const escudosContainer = document.getElementById('escudosContainer');
+        escudosContainer.innerHTML = '';
+
+        for (const [equipo, { escudo }] of Object.entries(enlaces[ligaActual])) {
+            const escudoDiv = document.createElement('div');
+            escudoDiv.className = 'escudo';
+            escudoDiv.innerHTML = `<img src="${escudo}" alt="${equipo}" onclick="mostrarVideo('${equipo}')">`;
+            escudosContainer.appendChild(escudoDiv);
+        }
+    }
+
+    // Mostrar escudos con videos
+    function mostrarEscudosConVideos() {
+        const escudosContainer = document.getElementById('escudosContainer');
+        escudosContainer.innerHTML = '';
+
+        // Filtrar equipos de todas las ligas que tienen un video activo (no '#', no vacío)
+        const equiposConVideos = [];
+
+        // Iterar sobre todas las ligas en el objeto enlaces
+        for (const liga in enlaces) {
+            const equiposLiga = enlaces[liga];
+            for (const equipo in equiposLiga) {
+                const videoLink = equiposLiga[equipo].video; // Obtener el enlace de video
+                if (videoLink && videoLink.trim() !== '#' && videoLink.trim() !== '') {
+                    equiposConVideos.push(equipo); // Agregar el equipo si tiene video activo
+                }
+            }
+        }
+
+        if (equiposConVideos.length === 0) {
+            escudosContainer.innerHTML = '<p>No hay equipos con videos disponibles.</p>';
+            return;
+        }
+
+        // Mostrar escudos de equipos con videos
+        for (const equipo of equiposConVideos) {
+            for (const liga in enlaces) {
+                const escudo = enlaces[liga][equipo]?.escudo; // Obtener el escudo del equipo
+                if (escudo) {
+                    const escudoDiv = document.createElement('div');
+                    escudoDiv.className = 'escudo';
+                    escudoDiv.innerHTML = `<img src="${escudo}" alt="${equipo}" onclick="mostrarVideo('${equipo}')">`;
+                    escudosContainer.appendChild(escudoDiv);
+                }
+            }
+        }
+    }
+
+    // Mostrar video
+    function mostrarVideo(equipo) {
+        const reproductor = document.getElementById('reproductor');
+        const videoContainer = document.getElementById('videoContainer');
+        videoContainer.innerHTML = `<iframe src="${enlaces[ligaActual][equipo].video}" frameborder="0" allowfullscreen></iframe>`;
+        reproductor.classList.add('show');
+    }
+
+    // Cerrar reproductor
+    function cerrarReproductor() {
+        const reproductor = document.getElementById('reproductor');
+        const videoContainer = document.getElementById('videoContainer');
+        videoContainer.innerHTML = '';
+        reproductor.classList.remove('show');
+    }
+
+    // Cargar enlaces al iniciar
+    cargarEnlaces(); // Llama a la función para cargar enlaces al inicio
+</script>
+</body>
+</html>
