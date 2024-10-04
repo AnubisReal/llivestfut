@@ -38,7 +38,7 @@
     },
     "realMadrid": {
       "escudo": "escudos/realmadrid.png",
-      "video": "#"
+      "video": "https://embedstreams.me/wnba/las-vegas-aces-w-vs-new-york-liberty-w-stream-2"
     },
     "realsociedad": {
       "escudo": "escudos/realsociedad.png",
