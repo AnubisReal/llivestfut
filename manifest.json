@@ -1,6 +1,6 @@
 {
     "name": "La Verdadera Vuelta",
-    "short_name": "Vuelta",
+    "short_name": "La Verdadera",
     "start_url": "./index.html",
     "display": "standalone",
     "background_color": "#ffffff",
