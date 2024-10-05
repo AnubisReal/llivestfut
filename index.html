@@ -215,42 +215,45 @@
     }
 
     // Mostrar escudos con videos
-    function mostrarEscudosConVideos() {
-        const escudosContainer = document.getElementById('escudosContainer');
-        escudosContainer.innerHTML = '';
+function mostrarEscudosConVideos() {
+    const escudosContainer = document.getElementById('escudosContainer');
+    escudosContainer.innerHTML = '';
 
-        // Filtrar equipos de todas las ligas que tienen un video activo (no '#', no vacío)
-        const equiposConVideos = [];
+    // Filtrar equipos de todas las ligas que tienen un video activo (no '#', no vacío)
+    const equiposConVideos = [];
+    const escudosMostrados = new Set(); // Crear un conjunto para rastrear escudos mostrados
 
-        // Iterar sobre todas las ligas en el objeto enlaces
-        for (const liga in enlaces) {
-            const equiposLiga = enlaces[liga];
-            for (const equipo in equiposLiga) {
-                const videoLink = equiposLiga[equipo].video; // Obtener el enlace de video
-                if (videoLink && videoLink.trim() !== '#' && videoLink.trim() !== '') {
-                    equiposConVideos.push(equipo); // Agregar el equipo si tiene video activo
-                }
-            }
-        }
-
-        if (equiposConVideos.length === 0) {
-            escudosContainer.innerHTML = '<p>No hay equipos con videos disponibles.</p>';
-            return;
-        }
-
-        // Mostrar escudos de equipos con videos
-        for (const equipo of equiposConVideos) {
-            for (const liga in enlaces) {
-                const escudo = enlaces[liga][equipo]?.escudo; // Obtener el escudo del equipo
-                if (escudo) {
-                    const escudoDiv = document.createElement('div');
-                    escudoDiv.className = 'escudo';
-                    escudoDiv.innerHTML = `<img src="${escudo}" alt="${equipo}" onclick="mostrarVideo('${equipo}')">`;
-                    escudosContainer.appendChild(escudoDiv);
-                }
+    // Iterar sobre todas las ligas en el objeto enlaces
+    for (const liga in enlaces) {
+        const equiposLiga = enlaces[liga];
+        for (const equipo in equiposLiga) {
+            const videoLink = equiposLiga[equipo].video; // Obtener el enlace de video
+            if (videoLink && videoLink.trim() !== '#' && videoLink.trim() !== '') {
+                equiposConVideos.push(equipo); // Agregar el equipo si tiene video activo
             }
         }
     }
+
+    if (equiposConVideos.length === 0) {
+        escudosContainer.innerHTML = '<p>No hay equipos con videos disponibles.</p>';
+        return;
+    }
+
+    // Mostrar escudos de equipos con videos
+    for (const equipo of equiposConVideos) {
+        for (const liga in enlaces) {
+            const escudo = enlaces[liga][equipo]?.escudo; // Obtener el escudo del equipo
+            if (escudo && !escudosMostrados.has(escudo)) { // Verificar si el escudo ya ha sido mostrado
+                const escudoDiv = document.createElement('div');
+                escudoDiv.className = 'escudo';
+                escudoDiv.innerHTML = `<img src="${escudo}" alt="${equipo}" onclick="mostrarVideo('${equipo}')">`;
+                escudosContainer.appendChild(escudoDiv);
+                escudosMostrados.add(escudo); // Añadir el escudo al conjunto
+            }
+        }
+    }
+}
+
 
     // Mostrar video
     function mostrarVideo(equipo) {
