@@ -96,7 +96,7 @@
     },
     "liverpool": {
       "escudo": "escudos/liverpool.png",
-      "video": "#"
+      "video": "https://embedstreams.me/epl/crystal-palace-vs-liverpool-stream-4"
     },
     "manchestercity": {
       "escudo": "escudos/manchestercity.png",
