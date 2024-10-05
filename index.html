@@ -254,20 +254,23 @@
     const videoLink = enlaces[ligaActual][equipo]?.video; // Obtener el enlace del video
 
     if (videoLink) {
-        // Intentar abrir en VLC
-        const vlcLink = `vlc://${videoLink}`;
-        
-        // Para Android, podrías usar intent
-        const intentLink = `intent://vlc://open/?url=${encodeURIComponent(videoLink)}#Intent;scheme=vlc;package=org.videolan.vlc;end`;
-
         // Verifica si estás en un dispositivo móvil
-        if (esDispositivoMovil()) {
-            window.location.href = intentLink; // Redirige al enlace
+        if (/Mobi|Android/i.test(navigator.userAgent)) {
+            // Redirige al enlace del video, el sistema operativo manejará la apertura en el reproductor predeterminado
+            window.location.href = videoLink;
         } else {
-            alert('El video se abrirá en VLC si está instalado.'); // Mensaje alternativo para otros dispositivos
+            // Para escritorio, simplemente abre el video
+            const videoElement = document.createElement('video');
+            videoElement.src = videoLink;
+            videoElement.controls = true;
+            videoElement.autoplay = true;
+            document.body.appendChild(videoElement);
         }
+    } else {
+        alert('No hay enlace de video disponible para este equipo.');
     }
 }
+
 
 
     // Cerrar reproductor
