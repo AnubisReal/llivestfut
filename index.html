@@ -246,7 +246,7 @@ function mostrarEscudosConVideos() {
             if (escudo && !escudosMostrados.has(escudo)) { // Verificar si el escudo ya ha sido mostrado
                 const escudoDiv = document.createElement('div');
                 escudoDiv.className = 'escudo';
-                escudoDiv.innerHTML = `<img src="${escudo}" alt="${equipo}" onclick="mostrarVideo('${equipo}')">`;
+                escudoDiv.innerHTML = `<img src="${escudo}" alt="${equipo}" onclick="mostrarVideo('${liga}', '${equipo}')">`;
                 escudosContainer.appendChild(escudoDiv);
                 escudosMostrados.add(escudo); // Añadir el escudo al conjunto
             }
@@ -256,12 +256,14 @@ function mostrarEscudosConVideos() {
 
 
     // Mostrar video
-    function mostrarVideo(equipo) {
-        const reproductor = document.getElementById('reproductor');
-        const videoContainer = document.getElementById('videoContainer');
-        videoContainer.innerHTML = `<iframe src="${enlaces[ligaActual][equipo].video}" frameborder="0" allowfullscreen></iframe>`;
-        reproductor.classList.add('show');
+    function mostrarVideo(liga, equipo) {
+    ligaActual = liga; // Actualizar la liga actual temporalmente
+    const reproductor = document.getElementById('reproductor');
+    const videoContainer = document.getElementById('videoContainer');
+    videoContainer.innerHTML = `<iframe src="${enlaces[liga][equipo].video}" frameborder="0" allowfullscreen></iframe>`;
+    reproductor.classList.add('show');
     }
+
 
     // Cerrar reproductor
     function cerrarReproductor() {
