@@ -256,13 +256,35 @@ function mostrarEscudosConVideos() {
 
 
     // Mostrar video
-    function mostrarVideo(liga, equipo) {
+function mostrarVideo(liga, equipo) {
     ligaActual = liga; // Actualizar la liga actual temporalmente
     const reproductor = document.getElementById('reproductor');
     const videoContainer = document.getElementById('videoContainer');
-    videoContainer.innerHTML = `<iframe src="${enlaces[liga][equipo].video}" frameborder="0" allowfullscreen allow="picture-in-picture" allowfullscreen></iframe>`;
+
+    // Crear el iframe con el video
+    const iframe = document.createElement('iframe');
+    iframe.src = enlaces[liga][equipo].video;
+    iframe.frameBorder = "0";
+    iframe.allow = "autoplay; fullscreen; picture-in-picture"; // Añadir permisos
+    iframe.allowFullscreen = true;
+
+    // Añadir el iframe al contenedor del video
+    videoContainer.innerHTML = ''; // Limpiar el contenedor anterior
+    videoContainer.appendChild(iframe); // Añadir el nuevo iframe
+
+    // Mostrar el reproductor
     reproductor.classList.add('show');
-    }
+
+    // Eventos de Picture-in-Picture
+    iframe.addEventListener('enterpictureinpicture', () => {
+        console.log('El video ha entrado en modo Picture-in-Picture');
+    });
+
+    iframe.addEventListener('leavepictureinpicture', () => {
+        console.log('El video ha salido de modo Picture-in-Picture');
+    });
+}
+
 
 
     // Cerrar reproductor
