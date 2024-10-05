@@ -6,9 +6,10 @@
     <title>La Verdadera Vuelta</title>
     <link rel="icon" href="escudos/barcelona.png" type="image/png"> <!-- Ajusta la ruta -->
     <link rel="shortcut icon" href="escudos/barcelona.png" type="image/png"> <!-- Para navegadores antiguos -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif; /* Cambiar a Poppins */
             margin: 0;
             padding: 0;
             background-color: #f0f0f0;
@@ -81,7 +82,7 @@
             display: block;
             position: fixed;
             top: 50%;
-            left: 49%;
+            left: 48%;
             transform: translate(-50%, -50%);
             background-color: #ffffff;
             border-radius: 15px;
@@ -249,11 +250,24 @@
 
     // Mostrar video
     function mostrarVideo(equipo) {
-        const reproductor = document.getElementById('reproductor');
-        const videoContainer = document.getElementById('videoContainer');
-        videoContainer.innerHTML = `<iframe src="${enlaces[ligaActual][equipo].video}" frameborder="0" allowfullscreen></iframe>`;
-        reproductor.classList.add('show');
+    const videoLink = enlaces[ligaActual][equipo]?.video; // Obtener el enlace del video
+
+    if (videoLink) {
+        // Intentar abrir en VLC
+        const vlcLink = `vlc://${videoLink}`;
+        
+        // Para Android, podrías usar intent
+        const intentLink = `intent://vlc://open/?url=${encodeURIComponent(videoLink)}#Intent;scheme=vlc;package=org.videolan.vlc;end`;
+
+        // Verifica si estás en un dispositivo móvil
+        if (esDispositivoMovil()) {
+            window.location.href = intentLink; // Redirige al enlace
+        } else {
+            alert('El video se abrirá en VLC si está instalado.'); // Mensaje alternativo para otros dispositivos
+        }
     }
+}
+
 
     // Cerrar reproductor
     function cerrarReproductor() {
@@ -266,5 +280,57 @@
     // Cargar enlaces al iniciar
     cargarEnlaces(); // Llama a la función para cargar enlaces al inicio
 </script>
+
+<!-- Footer Minimalista con Redes Sociales y Modal de Política de Privacidad -->
+<footer style="background-color: #333; color: white; padding: 10px 0; text-align: center; position: relative; width: 100%; bottom: 0;">
+    <p>&copy; 2024 La Verdadera Vuelta. Todos los derechos reservados.</p>
+    <p><a href="#" onclick="abrirModal()" style="color: #fff; text-decoration: none;">Política de Privacidad</a> | <a href="contacto.html" style="color: #fff; text-decoration: none;">Contacto</a></p>
+    <div style="margin-top: 10px;">
+        <a href="https://www.instagram.com/badboybmb/" target="_blank" style="margin-right: 15px;">
+            <img src="https://img.icons8.com/?size=100&id=32292&format=png&color=F0F0F0" alt="Instagram" style="width: 24px; height: 24px;">
+        </a>
+        <a href="https://x.com/Anubisreal23" target="_blank">
+            <img src="https://img.icons8.com/?size=100&id=fJp7hepMryiw&format=png&color=F0F0F0" alt="Twitter" style="width: 24px; height: 24px;">
+        </a>
+    </div>
+</footer>
+
+<!-- Modal para Política de Privacidad -->
+<div id="modalPrivacidad" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);">
+    <div style="background-color: white; margin: 15% auto; padding: 20px; border-radius: 10px; width: 80%; max-width: 600px;">
+        <span style="color: #333; font-weight: bold; float: right; cursor: pointer;" onclick="cerrarModal()">X</span>
+        <h2>Política de Privacidad</h2>
+        <p>
+            En <strong>La Verdadera Vuelta</strong>, respetamos la privacidad de nuestros usuarios y no alojamos contenido en nuestros servidores que infrinja las normas de derechos de autor o cualquier legislación vigente. Todo el contenido disponible en nuestra plataforma ha sido previamente compartido por terceros, actuando únicamente como intermediarios. Si algún material infringe los derechos de autor, puedes contactarnos y procederemos a eliminarlo. No compartimos información personal con terceros sin consentimiento expreso.
+        </p>
+    </div>
+</div>
+
+<script>
+    // Función para abrir el modal
+    function abrirModal() {
+        document.getElementById("modalPrivacidad").style.display = "block";
+    }
+
+    // Función para cerrar el modal
+    function cerrarModal() {
+        document.getElementById("modalPrivacidad").style.display = "none";
+    }
+</script>
+
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('service-worker.js').then(function(registration) {
+                console.log('Service Worker registrado con éxito:', registration);
+            }).catch(function(error) {
+                console.log('Error al registrar el Service Worker:', error);
+            });
+        });
+    }
+</script>
+
+
+
 </body>
 </html>
