@@ -2,11 +2,11 @@
   "laLiga": {
     "alaves": {
       "escudo": "escudos/alaves.png",
-      "video": "https://embedstreams.me/mls/houston-dynamo-fc-vs-new-england-revolution-stream-2"
+      "video": "#"
     },
     "barcelona": {
       "escudo": "escudos/barcelona.png",
-      "video": "https://embedstreams.me/mls/real-salt-lake-vs-minnesota-united-fc-stream-4"
+      "video": "#"
     },
     "betis": {
       "escudo": "escudos/betis.png",
