@@ -138,7 +138,7 @@
     },
     "borussiadortmund": {
       "escudo": "escudos/borussiadortmund.png",
-      "video": "#"
+      "video": "https://embedstreams.me/bundesliga/1-fc-union-berlin-vs-borussia-dortmund-stream-4"
     },
     "eintrachtfrankfurt": {
       "escudo": "escudos/eintrachtfrankfurt.png",
