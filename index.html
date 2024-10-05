@@ -251,27 +251,11 @@
 
     // Mostrar video
     function mostrarVideo(equipo) {
-    const videoLink = enlaces[ligaActual][equipo]?.video; // Obtener el enlace del video
-
-    if (videoLink) {
-        // Verifica si estás en un dispositivo móvil
-        if (/Mobi|Android/i.test(navigator.userAgent)) {
-            // Redirige al enlace del video, el sistema operativo manejará la apertura en el reproductor predeterminado
-            window.location.href = videoLink;
-        } else {
-            // Para escritorio, simplemente abre el video
-            const videoElement = document.createElement('video');
-            videoElement.src = videoLink;
-            videoElement.controls = true;
-            videoElement.autoplay = true;
-            document.body.appendChild(videoElement);
-        }
-    } else {
-        alert('No hay enlace de video disponible para este equipo.');
+        const reproductor = document.getElementById('reproductor');
+        const videoContainer = document.getElementById('videoContainer');
+        videoContainer.innerHTML = `<iframe src="${enlaces[ligaActual][equipo].video}" frameborder="0" allowfullscreen></iframe>`;
+        reproductor.classList.add('show');
     }
-}
-
-
 
     // Cerrar reproductor
     function cerrarReproductor() {
@@ -324,16 +308,17 @@
 
 <script>
     if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-            navigator.serviceWorker.register('service-worker.js').then(function(registration) {
-                console.log('Service Worker registrado con éxito:', registration);
-            }).catch(function(error) {
-                console.log('Error al registrar el Service Worker:', error);
-            });
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('service-worker.js')
+                .then(registration => {
+                    console.log('Service Worker registrado con éxito:', registration);
+                })
+                .catch(error => {
+                    console.error('Error al registrar el Service Worker:', error);
+                });
         });
     }
 </script>
-
 
 
 </body>
