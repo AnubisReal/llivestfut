@@ -352,6 +352,42 @@ function mostrarVideo(liga, equipo) {
     }
 </script>
 
+<script>
+    // Lista de URLs que permitimos abrir en una nueva ventana/pestaña
+    const urlsPermitidas = [
+        'https://www.instagram.com/badboybmb/', 
+        'https://x.com/Anubisreal23'
+    ];
+
+    // Sobrescribimos window.open para bloquear pestañas nuevas
+    const originalWindowOpen = window.open;  // Guardar el comportamiento original
+
+    window.open = function(url, target, features) {
+        // Si la URL está en la lista permitida, permitimos abrir la ventana/pestaña
+        if (urlsPermitidas.includes(url)) {
+            return originalWindowOpen.call(window, url, target, features);
+        } else {
+            console.log(`Intento de abrir ventana bloqueado: ${url}`);
+            return null;  // Bloquear cualquier otra ventana
+        }
+    };
+
+    // También bloqueamos los clicks con target="_blank"
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('a[target="_blank"]').forEach(link => {
+            link.addEventListener('click', function(event) {
+                const url = link.href;
+
+                // Solo permitir si la URL está en la lista permitida
+                if (!urlsPermitidas.includes(url)) {
+                    event.preventDefault();  // Bloqueamos la apertura de una nueva pestaña
+                    window.location.href = url;  // Redirigimos en la misma pestaña
+                }
+            });
+        });
+    });
+</script>
+
 
 </body>
 </html>
