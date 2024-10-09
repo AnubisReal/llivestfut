@@ -267,7 +267,7 @@ function mostrarVideo(liga, equipo) {
     // Verificar si el enlace del video es válido
     if (!videoUrl || videoUrl.trim() === '#' || videoUrl.trim() === '') {
         // Mostrar mensaje de que no hay video
-        videoContainer.innerHTML = '<p>Este equipo no está jugando en estos momentos.</p>';
+        videoContainer.innerHTML = '<div style="text-align: center; padding: 20px;"><p>Este equipo no está jugando en estos momentos.</p></div>';
     } else {
         // Crear el iframe con el video
         const iframe = document.createElement('iframe');
