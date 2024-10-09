@@ -210,7 +210,7 @@
         for (const [equipo, { escudo }] of Object.entries(enlaces[ligaActual])) {
             const escudoDiv = document.createElement('div');
             escudoDiv.className = 'escudo';
-            escudoDiv.innerHTML = `<img src="${escudo}" alt="${equipo}" onclick="mostrarVideo('${equipo}')">`;
+            escudoDiv.innerHTML = `<img src="${escudo}" alt="${equipo}" onclick="mostrarVideo('${ligaActual}', '${equipo}')">`;
             escudosContainer.appendChild(escudoDiv);
         }
     }
