@@ -262,17 +262,24 @@ function mostrarVideo(liga, equipo) {
     const reproductor = document.getElementById('reproductor');
     const videoContainer = document.getElementById('videoContainer');
 
-    // Crear el iframe con el video
-    const iframe = document.createElement('iframe');
-    iframe.src = enlaces[liga][equipo].video;
-    iframe.frameBorder = "0";
-    iframe.allow = "autoplay; fullscreen; picture-in-picture"; // Añadir permisos
-    iframe.allowFullscreen = true;
+    const videoUrl = enlaces[liga][equipo].video; // Obtener el enlace del video
 
-    // Añadir el iframe al contenedor del video
-    videoContainer.innerHTML = ''; // Limpiar el contenedor anterior
-    videoContainer.appendChild(iframe); // Añadir el nuevo iframe
+    // Verificar si el enlace del video es válido
+    if (!videoUrl || videoUrl.trim() === '#' || videoUrl.trim() === '') {
+        // Mostrar mensaje de que no hay video
+        videoContainer.innerHTML = '<p>Este equipo no está jugando en estos momentos.</p>';
+    } else {
+        // Crear el iframe con el video
+        const iframe = document.createElement('iframe');
+        iframe.src = videoUrl;
+        iframe.frameBorder = "0";
+        iframe.allow = "autoplay; fullscreen; picture-in-picture"; // Añadir permisos
+        iframe.allowFullscreen = true;
 
+        // Añadir el iframe al contenedor del video
+        videoContainer.innerHTML = ''; // Limpiar el contenedor anterior
+        videoContainer.appendChild(iframe); // Añadir el nuevo iframe
+    }
     // Mostrar el reproductor
     reproductor.classList.add('show');
 
