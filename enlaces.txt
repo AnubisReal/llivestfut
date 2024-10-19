@@ -284,7 +284,7 @@
   "mma": {
     "UFC": {
       "escudo": "escudos/ufc.png",
-      "video": "#"
+      "video": "https://embedstreams.me/ufc/ufc-fight-night-anthony-hernandez-vs-michel-pereira-stream-4"
     },
     "BKFC": {
       "escudo": "escudos/bkfc.png",
