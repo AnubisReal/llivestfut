@@ -2,15 +2,15 @@
   "laLiga": {
     "alaves": {
       "escudo": "escudos/alaves.png",
-      "video": "#"
+      "video": "https://embedstreams.me/mls/houston-dynamo-fc-vs-new-england-revolution-stream-2"
     },
     "barcelona": {
       "escudo": "escudos/barcelona.png",
-      "video": "#"
+      "video": "https://embedstreams.me/mls/real-salt-lake-vs-minnesota-united-fc-stream-4"
     },
     "betis": {
       "escudo": "escudos/betis.png",
-      "video": "#"
+      "video": "https://embedstreams.me/atp-tour/atp-shanghai-jakub-mensik-vs-grigor-dimitrov-stream-1"
     },
     "celta": {
       "escudo": "escudos/celta.png",
@@ -38,7 +38,7 @@
     },
     "realMadrid": {
       "escudo": "escudos/realmadrid.png",
-      "video": "https://embedstreams.me/la-liga/real-madrid-vs-villarreal-stream-3"
+      "video": "#"
     },
     "realsociedad": {
       "escudo": "escudos/realsociedad.png",
@@ -138,7 +138,7 @@
     },
     "borussiadortmund": {
       "escudo": "escudos/borussiadortmund.png",
-      "video": "https://embedstreams.me/bundesliga/1-fc-union-berlin-vs-borussia-dortmund-stream-4"
+      "video": "#"
     },
     "eintrachtfrankfurt": {
       "escudo": "escudos/eintrachtfrankfurt.png",
@@ -278,6 +278,20 @@
     },
     "tottenham": {
       "escudo": "escudos/tottenham.png",
+      "video": "#"
+    }
+  },
+  "mma": {
+    "UFC": {
+      "escudo": "escudos/ufc.png",
+      "video": "#"
+    },
+    "BKFC": {
+      "escudo": "escudos/bkfc.png",
+      "video": "#"
+    },
+    "oneFc": {
+      "escudo": "escudos/onefc.png",
       "video": "#"
     }
   }
