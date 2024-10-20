@@ -6,7 +6,7 @@
     },
     "barcelona": {
       "escudo": "escudos/barcelona.png",
-      "video": "https://embedstreams.me/mls/real-salt-lake-vs-minnesota-united-fc-stream-4"
+      "video": "https://embedstreams.me/la-liga/barcelona-vs-sevilla-stream-4"
     },
     "betis": {
       "escudo": "escudos/betis.png",
