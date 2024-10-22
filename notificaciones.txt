@@ -1,6 +1,0 @@
-{
-    "time": "01:03",
-    "title": "La Verdadera Vuelta",
-    "message": "Tienes un nuevo video disponible de tu equipo favorito.",
-    "link": "www.anubisreal.com"
-}
