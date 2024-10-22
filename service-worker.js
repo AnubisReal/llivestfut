@@ -1,4 +1,4 @@
-const CACHE_NAME = 'v1'; // Nombre de la caché
+const CACHE_NAME = 'v1.1'; // Nombre de la caché
 const urlsToCache = [
     '/',
     '/index.html',
