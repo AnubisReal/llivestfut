@@ -7,7 +7,6 @@
     <link rel="icon" href="escudos/barcelona.png" type="image/png"> <!-- Ajusta la ruta -->
     <link rel="shortcut icon" href="escudos/barcelona.png" type="image/png"> <!-- Para navegadores antiguos -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <meta name="description" content="La Verdadera Vuelta - Disfruta de los mejores partidos de fútbol y videos de tus equipos favoritos.">
     <link rel="manifest" href="manifest.json">
     <style>
         html, body {
@@ -146,6 +145,11 @@
                 height: 240px; /* Altura del iframe en móviles */
             }
 
+            .liga-button {
+                padding: 8px 10px; /* Botones más grandes en móviles */
+                font-size: 14px;
+            }
+
             .close-btn {
                 width: calc(100% - 20px); /* Botón de cerrar en móvil */
             }
@@ -281,6 +285,7 @@ function mostrarVideo(liga, equipo) {
         videoContainer.innerHTML = ''; // Limpiar el contenedor anterior
         videoContainer.appendChild(iframe); // Añadir el nuevo iframe
     }
+
     // Mostrar el reproductor
     reproductor.classList.add('show');
 
@@ -309,9 +314,9 @@ function mostrarVideo(liga, equipo) {
 </script>
 
 <!-- Footer Minimalista con Redes Sociales y Modal de Política de Privacidad -->
-<footer style="background-color: #006039; color: white; padding: 10px 0; text-align: center; position: relative; width: 100%; bottom: 0; left: 0; margin-top: auto;">
+<footer style="background-color: #006039; color: white; padding: 10px 0; text-align: center; position: absolute; width: 100%; bottom: 0; left: 0;">
     <p>&copy; 2024 La Verdadera Vuelta. Todos los derechos reservados.</p>
-    <p><a href="#" onclick="abrirModal()" style="color: #fff; text-decoration: none;">Política de Privacidad</a> | <a href="www.anubisreal.com" style="color: #fff; text-decoration: none;">Contacto</a></p>
+    <p><a href="#" onclick="abrirModal()" style="color: #fff; text-decoration: none;">Política de Privacidad</a> | <a href="contacto.html" style="color: #fff; text-decoration: none;">Contacto</a></p>
     <div style="margin-top: 10px;">
         <a href="https://www.instagram.com/badboybmb/" target="_blank" style="margin-right: 15px;">
             <img src="https://img.icons8.com/?size=100&id=32292&format=png&color=F0F0F0" alt="Instagram" style="width: 24px; height: 24px;">
@@ -395,15 +400,6 @@ function mostrarVideo(liga, equipo) {
         });
     });
 </script>
-
-<script src="notificaciones.js"></script> <!-- Incluir el archivo de notificaciones -->
-
-<script>
-    // Cargar enlaces al iniciar
-    cargarEnlaces(); // Llama a la función para cargar enlaces al inicio
-    inicializarNotificaciones(); // Inicializa las notificaciones
-</script>
-    
 
 </body>
 </html>
