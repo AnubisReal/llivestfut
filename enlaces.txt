@@ -96,7 +96,7 @@
     },
     "liverpool": {
       "escudo": "escudos/liverpool.png",
-      "video": "https://embedstreams.me/epl/crystal-palace-vs-liverpool-stream-4"
+      "video": "#"
     },
     "manchestercity": {
       "escudo": "escudos/manchestercity.png",
@@ -250,7 +250,7 @@
     },
     "borussiadortmund": {
       "escudo": "escudos/borussiadortmund.png",
-      "video": "https://embedstreams.me/uefa-under-19/real-madrid-u19-vs-borussia-dortmund-u19-stream-4"
+      "video": "#"
     },
     "inter": {
       "escudo": "escudos/inter.png",
@@ -284,7 +284,7 @@
   "mma": {
     "UFC": {
       "escudo": "escudos/ufc.png",
-      "video": "https://embedstreams.me/ufc/ufc-fight-night-anthony-hernandez-vs-michel-pereira-stream-4"
+      "video": "#"
     },
     "BKFC": {
       "escudo": "escudos/bkfc.png",
