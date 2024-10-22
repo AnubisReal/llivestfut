@@ -1,1 +1,1 @@
-
+{ "message": "¡No olvides el partido hoy!", "time": "15:30" }
