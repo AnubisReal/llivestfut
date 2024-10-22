@@ -1,1 +1,6 @@
-{ "message": "¡No olvides el partido hoy!", "time": "15:30" }
+{
+    "time": "00:40",
+    "title": "La Verdadera Vuelta",
+    "message": "Tienes un nuevo video disponible de tu equipo favorito.",
+    "link": "www.anubisreal.com"
+}
