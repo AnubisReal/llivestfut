@@ -38,7 +38,7 @@
     },
     "realMadrid": {
       "escudo": "escudos/realmadrid.png",
-      "video": "https://embedstreams.me/uefa-under-19/real-madrid-u19-vs-borussia-dortmund-u19-stream-4"
+      "video": "https://embedstreams.me/champions-league/real-madrid-vs-borussia-dortmund-stream-3"
     },
     "realsociedad": {
       "escudo": "escudos/realsociedad.png",
@@ -138,7 +138,7 @@
     },
     "borussiadortmund": {
       "escudo": "escudos/borussiadortmund.png",
-      "video": "https://embedstreams.me/uefa-under-19/real-madrid-u19-vs-borussia-dortmund-u19-stream-4"
+      "video": "https://embedstreams.me/champions-league/real-madrid-vs-borussia-dortmund-stream-3"
     },
     "eintrachtfrankfurt": {
       "escudo": "escudos/eintrachtfrankfurt.png",
