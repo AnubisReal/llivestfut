@@ -2,15 +2,15 @@
   "laLiga": {
     "alaves": {
       "escudo": "escudos/alaves.png",
-      "video": "https://embedstreams.me/mls/houston-dynamo-fc-vs-new-england-revolution-stream-2"
+      "video": "#"
     },
     "barcelona": {
       "escudo": "escudos/barcelona.png",
-      "video": "https://embedstreams.me/la-liga/barcelona-vs-sevilla-stream-4"
+      "video": "#"
     },
     "betis": {
       "escudo": "escudos/betis.png",
-      "video": "https://embedstreams.me/atp-tour/atp-shanghai-jakub-mensik-vs-grigor-dimitrov-stream-1"
+      "video": "#"
     },
     "celta": {
       "escudo": "escudos/celta.png",
@@ -38,7 +38,7 @@
     },
     "realMadrid": {
       "escudo": "escudos/realmadrid.png",
-      "video": "#"
+      "video": "https://embedstreams.me/uefa-under-19/real-madrid-u19-vs-borussia-dortmund-u19-stream-4"
     },
     "realsociedad": {
       "escudo": "escudos/realsociedad.png",
@@ -250,7 +250,7 @@
     },
     "borussiadortmund": {
       "escudo": "escudos/borussiadortmund.png",
-      "video": "#"
+      "video": "https://embedstreams.me/uefa-under-19/real-madrid-u19-vs-borussia-dortmund-u19-stream-4"
     },
     "inter": {
       "escudo": "escudos/inter.png",
