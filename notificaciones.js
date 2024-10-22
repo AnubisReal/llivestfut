@@ -1,4 +1,3 @@
-
 // solicitarPermisoNotificaciones.js
 
 // Solicitar permiso para las notificaciones
@@ -30,7 +29,7 @@ function leerNotificaciones() {
 
             // Comprobar si la hora actual coincide con la hora de la notificación
             if (notificaciones.time === horaActual) {
-                mostrarNotificacion(notificaciones.message);
+                mostrarNotificacion(notificaciones.title, notificaciones.message, notificaciones.link);
             }
         })
         .catch(error => {
@@ -39,14 +38,16 @@ function leerNotificaciones() {
 }
 
 // Mostrar notificación
-function mostrarNotificacion(mensaje) {
-    const notificacion = new Notification('Notificación', {
+function mostrarNotificacion(titulo, mensaje, enlace) {
+    const notificacion = new Notification(titulo, {
         body: mensaje,
         icon: 'escudos/barcelona.png' // Cambia la ruta del icono si es necesario
     });
 
+    // Redirigir al hacer clic en la notificación
     notificacion.onclick = function() {
-        window.focus(); // Opcional: traer la ventana al frente
+        window.open(enlace, '_blank'); // Abre el enlace en una nueva pestaña
+        notificacion.close(); // Cierra la notificación
     };
 }
 
