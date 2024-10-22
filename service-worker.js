@@ -1,4 +1,4 @@
-const CACHE_NAME = 'v1.1'; // Cambia manualmente el nombre de la caché para forzar la actualización
+const CACHE_NAME = 'v1.2'; // Cambia manualmente el nombre de la caché para forzar la actualización
 const urlsToCache = [
     '/',
     '/index.html',
