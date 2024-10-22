@@ -1,4 +1,4 @@
-const CACHE_NAME = 'v1'; // Nombre de la caché
+const CACHE_NAME = 'v1.1'; // Cambia manualmente el nombre de la caché para forzar la actualización
 const urlsToCache = [
     '/',
     '/index.html',
@@ -11,6 +11,7 @@ const urlsToCache = [
 // Instalación del Service Worker
 self.addEventListener('install', (event) => {
     console.log('Service Worker: Instalando...');
+    self.skipWaiting(); // Forzar la activación inmediata del nuevo Service Worker
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
             console.log('Service Worker: Cacheando archivos');
@@ -34,6 +35,7 @@ self.addEventListener('activate', (event) => {
             );
         })
     );
+    return self.clients.claim(); // Tomar control inmediatamente de las pestañas abiertas
 });
 
 // Interceptar solicitudes de red
@@ -51,4 +53,10 @@ self.addEventListener('fetch', (event) => {
         // Si la solicitud es de video, simplemente realiza la solicitud de red
         event.respondWith(fetch(event.request));
     }
+});
+
+// Detección de nueva versión del Service Worker
+self.addEventListener('controllerchange', () => {
+    console.log('Nueva versión del Service Worker activada, recargando la página...');
+    window.location.reload(); // Recargar la página para cargar la nueva versión
 });
