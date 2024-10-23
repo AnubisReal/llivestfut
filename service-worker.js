@@ -1,4 +1,4 @@
-const CACHE_NAME = 'v1.5'; // Nombre de la caché
+const CACHE_NAME = 'v1.3'; // Nombre de la caché
 const urlsToCache = [
     '/',
     '/index.html',
@@ -51,44 +51,4 @@ self.addEventListener('fetch', (event) => {
         // Si la solicitud es de video, simplemente realiza la solicitud de red
         event.respondWith(fetch(event.request));
     }
-});
-
-// ==========================
-// Notificaciones Push
-// ==========================
-
-// Función para obtener el contenido del archivo message.txt
-async function getMessageData() {
-    try {
-        const response = await fetch('/message.txt');
-        const text = await response.text();
-        
-        // Separar la primera línea (fecha) y la segunda línea (mensaje)
-        const lines = text.split('\n');
-        const notificationTime = lines[0].trim(); // La fecha/hora está en la primera línea
-        const message = lines[1].trim(); // El mensaje está en la segunda línea
-        
-        return { notificationTime, message };
-    } catch (error) {
-        console.error('Error al obtener el mensaje:', error);
-        return { notificationTime: null, message: 'No se pudo cargar el mensaje de notificación.' };
-    }
-}
-
-//
-
-
-// Registrar evento push para mostrar notificaciones
-self.addEventListener('push', async (event) => {
-    const message = await getMessage();  // Leer el contenido del archivo
-
-    const options = {
-        body: message, // Mostrar el mensaje obtenido de message.txt
-        icon: '/icon.png',  // Asegúrate de tener un icono para la notificación
-        badge: '/badge.png' // Puedes tener una insignia opcional
-    };
-
-    event.waitUntil(
-        self.registration.showNotification('Notificación Automática', options)
-    );
 });
