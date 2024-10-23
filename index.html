@@ -396,28 +396,5 @@ function mostrarVideo(liga, equipo) {
     });
 </script>
 
-<script src="https://js.pusher.com/beams/1.0/pusher-beams.min.js"></script>
-<script>
-  // Solicitar permiso para notificaciones
-  Notification.requestPermission()
-    .then(permission => {
-      if (permission === 'granted') {
-        console.log('Permission granted for notifications.');
-
-        const beamsClient = new PusherPushNotifications.Client({
-          instanceId: '936fcad6-1be6-4e2c-b75f-7bd0587316ef',
-        });
-
-        beamsClient.start()
-          .then(() => beamsClient.addDeviceInterest('hello'))
-          .then(() => console.log('Successfully registered and subscribed!'))
-          .catch(console.error);
-      } else {
-        console.log('Permission denied for notifications.');
-      }
-    });
-</script>
-
-
 </body>
 </html>
