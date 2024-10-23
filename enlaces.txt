@@ -2,7 +2,7 @@
   "laLiga": {
     "alaves": {
       "escudo": "escudos/alaves.png",
-      "video": "#"
+      "video": "https://hlswish.com/e/b3pu1f79prtq"
     },
     "barcelona": {
       "escudo": "escudos/barcelona.png",
