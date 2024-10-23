@@ -52,3 +52,33 @@ self.addEventListener('fetch', (event) => {
         event.respondWith(fetch(event.request));
     }
 });
+
+// ==========================
+// Notificaciones Push
+// ==========================
+
+// Función para obtener el contenido del archivo de mensaje
+async function getMessage() {
+    try {
+        const response = await fetch('/message.txt'); // Obtiene el contenido del archivo message.txt
+        return await response.text(); // Retorna el contenido como texto
+    } catch (error) {
+        console.error('Error al obtener el mensaje:', error);
+        return 'No se pudo cargar el mensaje de notificación.';
+    }
+}
+
+// Registrar evento push para mostrar notificaciones
+self.addEventListener('push', async (event) => {
+    const message = await getMessage();  // Leer el contenido del archivo
+
+    const options = {
+        body: message, // Mostrar el mensaje obtenido de message.txt
+        icon: '/icon.png',  // Asegúrate de tener un icono para la notificación
+        badge: '/badge.png' // Puedes tener una insignia opcional
+    };
+
+    event.waitUntil(
+        self.registration.showNotification('Notificación Automática', options)
+    );
+});
