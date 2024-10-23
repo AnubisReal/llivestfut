@@ -57,16 +57,26 @@ self.addEventListener('fetch', (event) => {
 // Notificaciones Push
 // ==========================
 
-// Función para obtener el contenido del archivo de mensaje
-async function getMessage() {
+// Función para obtener el contenido del archivo message.txt
+async function getMessageData() {
     try {
-        const response = await fetch('/message.txt'); // Obtiene el contenido del archivo message.txt
-        return await response.text(); // Retorna el contenido como texto
+        const response = await fetch('/message.txt');
+        const text = await response.text();
+        
+        // Separar la primera línea (fecha) y la segunda línea (mensaje)
+        const lines = text.split('\n');
+        const notificationTime = lines[0].trim(); // La fecha/hora está en la primera línea
+        const message = lines[1].trim(); // El mensaje está en la segunda línea
+        
+        return { notificationTime, message };
     } catch (error) {
         console.error('Error al obtener el mensaje:', error);
-        return 'No se pudo cargar el mensaje de notificación.';
+        return { notificationTime: null, message: 'No se pudo cargar el mensaje de notificación.' };
     }
 }
+
+//
+
 
 // Registrar evento push para mostrar notificaciones
 self.addEventListener('push', async (event) => {
