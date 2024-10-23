@@ -396,36 +396,5 @@ function mostrarVideo(liga, equipo) {
     });
 </script>
 
-    <script>
-        // Verifica si el navegador soporta service workers
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js')
-                .then(registration => {
-                    console.log('Service Worker registrado con éxito:', registration);
-
-                    // Solicita permiso para enviar notificaciones push
-                    if (Notification.permission === 'default') {
-                        Notification.requestPermission().then(permission => {
-                            if (permission === 'granted') {
-                                console.log('Permiso para notificaciones concedido.');
-                            } else {
-                                console.log('Permiso para notificaciones denegado.');
-                            }
-                        });
-                    } else if (Notification.permission === 'granted') {
-                        console.log('Permiso ya concedido para notificaciones.');
-                    } else {
-                        console.log('Notificaciones bloqueadas por el usuario.');
-                    }
-                }).catch(error => {
-                    console.log('Error al registrar el Service Worker:', error);
-                });
-            });
-        } else {
-            console.log('El navegador no soporta Service Workers.');
-        }
-    </script>
-    
 </body>
 </html>
