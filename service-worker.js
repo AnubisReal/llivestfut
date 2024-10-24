@@ -1,9 +1,11 @@
-const CACHE_NAME = 'v1.4'; // Nombre de la caché
+importScripts("https://js.pusher.com/beams/service-worker.js");
+
+const CACHE_NAME = 'v1'; // Nombre de la caché
 const urlsToCache = [
     '/',
     '/index.html',
     '/manifest.json',
-    '/escudos/barcelona.png', // Incluye tus recursos aquí
+    '/escudos/barcelona.png',
     'https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap',
     // Agrega aquí más recursos que desees almacenar en caché
 ];
@@ -36,19 +38,28 @@ self.addEventListener('activate', (event) => {
     );
 });
 
-// Interceptar solicitudes de red
+// Estrategia 'stale-while-revalidate' para solicitudes de red
 self.addEventListener('fetch', (event) => {
     console.log('Service Worker: Interceptando la solicitud a', event.request.url);
-    // Solo manejar el almacenamiento en caché para las solicitudes que no son de video
-    if (event.request.destination !== 'video') {
-        event.respondWith(
-            caches.match(event.request).then((response) => {
-                // Devuelve el recurso desde la caché si está disponible, si no, realiza la solicitud de red
-                return response || fetch(event.request);
-            })
-        );
-    } else {
-        // Si la solicitud es de video, simplemente realiza la solicitud de red
+    
+    // Estrategia para solicitudes de 'video' (no se almacena en caché)
+    if (event.request.destination === 'video') {
         event.respondWith(fetch(event.request));
+        return;
     }
+    
+    // Estrategia 'stale-while-revalidate' para otras solicitudes
+    event.respondWith(
+        caches.open(CACHE_NAME).then((cache) => {
+            return cache.match(event.request).then((cachedResponse) => {
+                const fetchPromise = fetch(event.request).then((networkResponse) => {
+                    // Actualiza la caché con la nueva versión del recurso
+                    cache.put(event.request, networkResponse.clone());
+                    return networkResponse;
+                });
+                // Devuelve la versión caché si está disponible, pero actualiza en segundo plano
+                return cachedResponse || fetchPromise;
+            });
+        })
+    );
 });
