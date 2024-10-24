@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Verdadera Vuelta</title>
+    <link rel="icon" href="escudos/barcelona.png" type="image/png"> <!-- Ajusta la ruta -->
+    <link rel="shortcut icon" href="escudos/barcelona.png" type="image/png"> <!-- Para navegadores antiguos -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <meta name="description" content="Disfruta del contenido">
+    <link rel="manifest" href="manifest.json">
+    <style>
+        html, body {
+            font-family: 'Poppins', sans-serif; /* Cambiar a Poppins */
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden; /* Evita el desbordamiento horizontal */
+            background-color: #f0f0f0;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            background-color: #000000;
+            color: white;
+            padding: 20px;
+            width: 100%;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            cursor: pointer;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        .liga-buttons {
+            margin: 20px;
+        }
+
+        .liga-button {
+            background-color: #000000;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin: 5px 5px;
+        }
+
+        .liga-button:hover {
+            background-color: #8400ff;
+            color: rgb(255, 255, 255);
+        }
+
+        .escudos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .escudo {
+            margin: 10px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .escudo img {
+            width: 150px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .escudo:hover {
+            transform: scale(1.1);
+        }
+
+        #reproductor {
+            display: block;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            padding: 0;
+            z-index: 20;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+            margin-top: 20px; /* Añadir margen superior */
+            width: 90%; /* Ajustar el ancho al 90% */
+            max-width: 400px; /* Limitar el ancho máximo */
+        }
+
+        #reproductor.show {
+            opacity: 1;
+        }
+
+        #reproductor iframe {
+            width: 100%; /* Ajustar el iframe al 100% del contenedor */
+            height: 240px; /* Altura fija */
+            border-radius: 10px;
+            border: none;
+        }
+
+        .close-btn {
+            background-color: #006039;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-bottom: 10px;
+            font-weight: bold;
+            display: block;
+            width: calc(100% - 20px); /* 100% menos margen */
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+        .close-btn:hover {
+            background-color: #006039;
+        }
+
+        @media (max-width: 600px) {
+            .escudo img {
+                width: 100px;
+            }
+
+            #reproductor {
+                width: 90%; /* 90% en móviles */
+                max-width: none; /* Quitar max-width para móviles */
+            }
+
+            #reproductor iframe {
+                height: 240px; /* Altura del iframe en móviles */
+            }
+
+            .close-btn {
+                width: calc(100% - 20px); /* Botón de cerrar en móvil */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header onclick="mostrarEscudos()">
+    <h1>Cine Por El Tubo</h1>
+</header>
+
+<div class="liga-buttons">
+    <button class="liga-button" onclick="cambiarLiga('Pelis')">Pelis</button>
+    <button class="liga-button" onclick="cambiarLiga('Series')">Series</button>
+    <button class="liga-button" onclick="window.location.href='index.html'">Sports</button>
+</div>
+
+<div class="escudos" id="escudosContainer"></div>
+
+<div id="reproductor">
+    <button class="close-btn" onclick="cerrarReproductor()">Cerrar</button>
+    <div id="videoContainer"></div>
+</div>
+
+<script>
+    let ligaActual = 'Pelis'; // Liga inicial
+    let enlaces; // Objeto para almacenar los enlaces cargados
+
+    // Función para cargar los enlaces desde enlaces.txt
+    function cargarEnlaces() {
+        fetch('peliculas.txt')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al cargar el archivo: ' + response.statusText);
+                }
+                return response.json(); // Convertir la respuesta a JSON
+            })
+            .then(data => {
+                enlaces = data; // Guardar los datos en el objeto enlaces
+                mostrarEscudos(); // Mostrar escudos después de cargar
+            })
+            .catch(error => {
+                console.error('Hubo un problema con la petición Fetch:', error);
+            });
+    }
+
+    // Cambiar liga
+    function cambiarLiga(liga) {
+        ligaActual = liga;
+        mostrarEscudos();
+    }
+
+    // Mostrar escudos de la liga actual
+    function mostrarEscudos() {
+        const escudosContainer = document.getElementById('escudosContainer');
+        escudosContainer.innerHTML = '';
+
+        for (const [equipo, { escudo }] of Object.entries(enlaces[ligaActual])) {
+            const escudoDiv = document.createElement('div');
+            escudoDiv.className = 'escudo';
+            escudoDiv.innerHTML = `<img src="${escudo}" alt="${equipo}" onclick="mostrarVideo('${ligaActual}', '${equipo}')">`;
+            escudosContainer.appendChild(escudoDiv);
+        }
+    }
+
+    // Mostrar escudos con videos
+function mostrarEscudosConVideos() {
+    const escudosContainer = document.getElementById('escudosContainer');
+    escudosContainer.innerHTML = '';
+
+    // Filtrar equipos de todas las ligas que tienen un video activo (no '#', no vacío)
+    const equiposConVideos = [];
+    const escudosMostrados = new Set(); // Crear un conjunto para rastrear escudos mostrados
+
+    // Iterar sobre todas las ligas en el objeto enlaces
+    for (const liga in enlaces) {
+        const equiposLiga = enlaces[liga];
+        for (const equipo in equiposLiga) {
+            const videoLink = equiposLiga[equipo].video; // Obtener el enlace de video
+            if (videoLink && videoLink.trim() !== '#' && videoLink.trim() !== '') {
+                equiposConVideos.push(equipo); // Agregar el equipo si tiene video activo
+            }
+        }
+    }
+
+    if (equiposConVideos.length === 0) {
+        escudosContainer.innerHTML = '<p>No hay equipos con videos disponibles.</p>';
+        return;
+    }
+
+    // Mostrar escudos de equipos con videos
+    for (const equipo of equiposConVideos) {
+        for (const liga in enlaces) {
+            const escudo = enlaces[liga][equipo]?.escudo; // Obtener el escudo del equipo
+            if (escudo && !escudosMostrados.has(escudo)) { // Verificar si el escudo ya ha sido mostrado
+                const escudoDiv = document.createElement('div');
+                escudoDiv.className = 'escudo';
+                escudoDiv.innerHTML = `<img src="${escudo}" alt="${equipo}" onclick="mostrarVideo('${liga}', '${equipo}')">`;
+                escudosContainer.appendChild(escudoDiv);
+                escudosMostrados.add(escudo); // Añadir el escudo al conjunto
+            }
+        }
+    }
+}
+
+
+    // Mostrar video
+function mostrarVideo(liga, equipo) {
+    ligaActual = liga; // Actualizar la liga actual temporalmente
+    const reproductor = document.getElementById('reproductor');
+    const videoContainer = document.getElementById('videoContainer');
+
+    const videoUrl = enlaces[liga][equipo].video; // Obtener el enlace del video
+
+    // Verificar si el enlace del video es válido
+    if (!videoUrl || videoUrl.trim() === '#' || videoUrl.trim() === '') {
+        // Mostrar mensaje de que no hay video
+        videoContainer.innerHTML = '<div style="text-align: center; padding: 20px;"><p>No hay contenidoooo copon</p></div>';
+    } else {
+        // Crear el iframe con el video
+        const iframe = document.createElement('iframe');
+        iframe.src = videoUrl;
+        iframe.frameBorder = "0";
+        iframe.allow = "autoplay; fullscreen; picture-in-picture"; // Añadir permisos
+        iframe.allowFullscreen = true;
+
+        // Añadir el iframe al contenedor del video
+        videoContainer.innerHTML = ''; // Limpiar el contenedor anterior
+        videoContainer.appendChild(iframe); // Añadir el nuevo iframe
+    }
+    // Mostrar el reproductor
+    reproductor.classList.add('show');
+
+    // Eventos de Picture-in-Picture
+    iframe.addEventListener('enterpictureinpicture', () => {
+        console.log('El video ha entrado en modo Picture-in-Picture');
+    });
+
+    iframe.addEventListener('leavepictureinpicture', () => {
+        console.log('El video ha salido de modo Picture-in-Picture');
+    });
+}
+
+
+
+    // Cerrar reproductor
+    function cerrarReproductor() {
+        const reproductor = document.getElementById('reproductor');
+        const videoContainer = document.getElementById('videoContainer');
+        videoContainer.innerHTML = '';
+        reproductor.classList.remove('show');
+    }
+
+    // Cargar enlaces al iniciar
+    cargarEnlaces(); // Llama a la función para cargar enlaces al inicio
+</script>
+
+<!-- Footer Minimalista con Redes Sociales y Modal de Política de Privacidad -->
+<footer style="background-color: #000000; color: white; padding: 10px 0; text-align: center; position: relative; width: 100%; bottom: 0; left: 0; margin-top: auto;">
+    <p>&copy; 2024 La Verdadera Vuelta. Todos los derechos reservados.</p>
+    <p><a href="#" onclick="abrirModal()" style="color: #fff; text-decoration: none;">Política de Privacidad</a> | <a href="www.anubisreal.com" style="color: #fff; text-decoration: none;">Contacto</a></p>
+    <div style="margin-top: 10px;">
+        <a href="https://www.instagram.com/badboybmb/" target="_blank" style="margin-right: 15px;">
+            <img src="https://img.icons8.com/?size=100&id=32292&format=png&color=F0F0F0" alt="Instagram" style="width: 24px; height: 24px;">
+        </a>
+        <a href="https://x.com/Anubisreal23" target="_blank">
+            <img src="https://img.icons8.com/?size=100&id=fJp7hepMryiw&format=png&color=F0F0F0" alt="Twitter" style="width: 24px; height: 24px;">
+        </a>
+    </div>
+</footer>
+
+
+<!-- Modal para Política de Privacidad -->
+<div id="modalPrivacidad" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);">
+    <div style="background-color: white; margin: 15% auto; padding: 20px; border-radius: 10px; width: 80%; max-width: 600px;">
+        <span style="color: #333; font-weight: bold; float: right; cursor: pointer;" onclick="cerrarModal()">X</span>
+        <h2>Política de Privacidad</h2>
+        <p>
+            En <strong>La Verdadera Vuelta</strong>, respetamos la privacidad de nuestros usuarios y no alojamos contenido en nuestros servidores que infrinja las normas de derechos de autor o cualquier legislación vigente. Todo el contenido disponible en nuestra plataforma ha sido previamente compartido por terceros, actuando únicamente como intermediarios. Si algún material infringe los derechos de autor, puedes contactarnos y procederemos a eliminarlo. No compartimos información personal con terceros sin consentimiento expreso.
+        </p>
+    </div>
+</div>
+
+<script>
+    // Función para abrir el modal
+    function abrirModal() {
+        document.getElementById("modalPrivacidad").style.display = "block";
+    }
+
+    // Función para cerrar el modal
+    function cerrarModal() {
+        document.getElementById("modalPrivacidad").style.display = "none";
+    }
+</script>
+
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('service-worker.js')
+                .then(registration => {
+                    console.log('Service Worker registrado con éxito:', registration);
+                })
+                .catch(error => {
+                    console.error('Error al registrar el Service Worker:', error);
+                });
+        });
+    }
+</script>
+
+<script>
+    // Lista de URLs que permitimos abrir en una nueva ventana/pestaña
+    const urlsPermitidas = [
+        'https://www.instagram.com/badboybmb/', 
+        'https://x.com/Anubisreal23'
+    ];
+
+    // Sobrescribimos window.open para bloquear pestañas nuevas
+    const originalWindowOpen = window.open;  // Guardar el comportamiento original
+
+    window.open = function(url, target, features) {
+        // Si la URL está en la lista permitida, permitimos abrir la ventana/pestaña
+        if (urlsPermitidas.includes(url)) {
+            return originalWindowOpen.call(window, url, target, features);
+        } else {
+            console.log(`Intento de abrir ventana bloqueado: ${url}`);
+            return null;  // Bloquear cualquier otra ventana
+        }
+    };
+
+    // También bloqueamos los clicks con target="_blank"
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('a[target="_blank"]').forEach(link => {
+            link.addEventListener('click', function(event) {
+                const url = link.href;
+
+                // Solo permitir si la URL está en la lista permitida
+                if (!urlsPermitidas.includes(url)) {
+                    event.preventDefault();  // Bloqueamos la apertura de una nueva pestaña
+                    window.location.href = url;  // Redirigimos en la misma pestaña
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
