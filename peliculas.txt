@@ -1,0 +1,74 @@
+{
+    "Pelis": {
+        "Película 1": {
+            "escudo": "https://pics.filmaffinity.com/zack_snyder_s_justice_league-554207771-mmed.jpg",
+            "video": "#"
+        },
+        "Película 2": {
+            "escudo": "https://pics.filmaffinity.com/smile_2-891902080-mmed.jpg",
+            "video": "#"
+        },
+        "Película 3": {
+            "escudo": "https://pics.filmaffinity.com/zack_snyder_s_justice_league-554207771-mmed.jpg",
+            "video": "#"
+        },
+        "Película 4": {
+            "escudo": "https://pics.filmaffinity.com/smile_2-891902080-mmed.jpg",
+            "video": "#"
+        },
+        "Película 5": {
+            "escudo": "https://pics.filmaffinity.com/zack_snyder_s_justice_league-554207771-mmed.jpg",
+            "video": "#"
+        },
+        "Película 6": {
+            "escudo": "https://pics.filmaffinity.com/smile_2-891902080-mmed.jpg",
+            "video": "#"
+        },
+        "Película 7": {
+            "escudo": "https://pics.filmaffinity.com/zack_snyder_s_justice_league-554207771-mmed.jpg",
+            "video": "#"
+        },
+        "Película 8": {
+            "escudo": "https://pics.filmaffinity.com/smile_2-891902080-mmed.jpg",
+            "video": "#"
+        },
+        "Película 9": {
+            "escudo": "https://pics.filmaffinity.com/zack_snyder_s_justice_league-554207771-mmed.jpg",
+            "video": "#"
+        },
+        "Película 10": {
+            "escudo": "https://pics.filmaffinity.com/smile_2-891902080-mmed.jpg",
+            "video": "#"
+        },
+        "Película 11": {
+            "escudo": "https://pics.filmaffinity.com/zack_snyder_s_justice_league-554207771-mmed.jpg",
+            "video": "#"
+        },
+        "Película 12": {
+            "escudo": "https://pics.filmaffinity.com/smile_2-891902080-mmed.jpg",
+            "video": "#"
+        }
+    },
+    "Series": {
+        "Serie 1": {
+            "escudo": "https://pics.filmaffinity.com/game_of_thrones-293142110-mmed.jpg",
+            "video": "#"
+        },
+        "Serie 2": {
+            "escudo": "https://pics.filmaffinity.com/juanes_enter_sandman-354309597-mmed.jpg",
+            "video": "#"
+        },
+        "Serie 3": {
+            "escudo": "https://pics.filmaffinity.com/game_of_thrones-293142110-mmed.jpg",
+            "video": "#"
+        },
+        "Serie 4": {
+            "escudo": "https://pics.filmaffinity.com/juanes_enter_sandman-354309597-mmed.jpg",
+            "video": "#"
+        },
+        "Serie 5": {
+            "escudo": "https://pics.filmaffinity.com/game_of_thrones-293142110-mmed.jpg",
+            "video": "#"
+        }
+    }
+}
